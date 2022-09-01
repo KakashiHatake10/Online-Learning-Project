@@ -61,7 +61,7 @@
 						class='bx bxs-chevron-down js-arrow arrow '></i>
 						<ul class="js-sub-menu sub-menu">
 							<li><a href="logout">logout</a></li>
-							<li><a href="profile">Profile</a></li>
+							<li><a th:href="@{'profile?id='+${session.email}}">Profile</a></li>
 							<li><a th:href="@{'mycourse?id='+${session.email}}">My Course</a></li>
 						</ul></li>
 				</ul>
