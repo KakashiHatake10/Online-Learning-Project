@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal - www.codingnepalweb.com -->
+<html lang="en" dir="ltr" xmlns:th="https://thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<!-- <title> Responsive Drop Down Navigation Menu | CodingLab </title>-->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Boxicons CDN Link -->
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'
+	rel='stylesheet'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/header.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/footer.css">
+</head>
+<body>
+	<nav>
+		<div class="navbar">
+			<i class='bx bx-menu'></i>
+			<div class="logo">
+				<a href="#">Learning</a>
+			</div>
+			<div class="nav-links">
+				<div class="sidebar-logo">
+					<span class="logo-name">CodingLab</span> <i class='bx bx-x'></i>
+				</div>
+				<ul class="links">
+					<li><a href="/">HOME</a></li>
+					<li><a href="#">WEB DESIGN</a> <i
+						class='bx bxs-chevron-down htmlcss-arrow arrow  '></i>
+						<ul class="htmlCss-sub-menu sub-menu">
+							<li><a href="#">HTML</a></li>
+							<li><a href="#">CSS</a></li>
+							<li><a href="#">Bootstrap</a></li>
+							<li class="more"><span><a href="#">More</a> <i
+									class='bx bxs-chevron-right arrow more-arrow'></i> </span>
+								<ul class="more-sub-menu sub-menu">
+									<li><a href="#">Neumorphism</a></li>
+									<li><a href="#">Pre-loader</a></li>
+									<li><a href="#">Glassmorphism</a></li>
+								</ul></li>
+						</ul></li>
+					<li><a href="#">PROGRAMMING</a> <i
+						class='bx bxs-chevron-down js-arrow arrow '></i>
+						<ul class="js-sub-menu sub-menu">
+							<li><a href="#">JAVA</a></li>
+							<li><a href="#">PYTHON</a></li>
+							<li><a href="#">GO LANG</a></li>
+							<li><a href="#">SWIFT</a></li>
+						</ul></li>
+					<li><a href="#">ABOUT US</a></li>
+					<li><a href="#">CONTACT US</a></li>
+					<li th:if="${session.login} == null"><a href="#"
+						th:href="login">LOGIN</a>|<a href="#" th:href="signup">SIGNUP</a></li>
+					<li th:if="${session.login} != null"><span
+						th:text=${session.login}></span> <i
+						class='bx bxs-chevron-down js-arrow arrow '></i>
+						<ul class="js-sub-menu sub-menu">
+							<li><a href="logout">logout</a></li>
+							<li><a href="profile">Profile</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			<div class="search-box">
+				<i class='bx bx-search'></i>
+				<div class="input-box">
+					<input type="text" placeholder="Search...">
+				</div>
+			</div>
+		</div>
+	</nav>
+<body>
+	<form class="modal-content " action="user_register" method="post"
+		modelAttribute="user">
+		<div class="container">
+			<h1>Register Form</h1>
+			<input type="email" placeholder="Enter Email ID" name="email"
+				required><br> <input type="text"
+				placeholder="Enter Name" name="name" required><br> <label
+				for="cars">Become: </label><select name="role">
+				<option value="ROLE_CUSTOMER">learner</option>
+				<option value="ROLE_ADMIN">Tutor</option>
+			</select> <br> <input type="text" placeholder="Enter Phone Number"
+				name="phone" required> <br> <input type="text"
+				placeholder="Enter Address" name="address" required><br>
+			<input type="password" placeholder="Enter Password" name="password"
+				id="myInput" required><br> <input type="checkbox"
+				onclick="myFunction()">Show Password<br>
+			<button type="submit">Submit</button>
+
+		</div>
+	</form>
+</body>
+<script>
+	  // search-box open close js code
+let navbar = document.querySelector(".navbar");
+let searchBox = document.querySelector(".search-box .bx-search");
+// let searchBoxCancel = document.querySelector(".search-box .bx-x");
+
+searchBox.addEventListener("click", ()=>{
+  navbar.classList.toggle("showInput");
+  if(navbar.classList.contains("showInput")){
+    searchBox.classList.replace("bx-search" ,"bx-x");
+  }else {
+    searchBox.classList.replace("bx-x" ,"bx-search");
+  }
+});
+
+// sidebar open close js code
+let navLinks = document.querySelector(".nav-links");
+let menuOpenBtn = document.querySelector(".navbar .bx-menu");
+let menuCloseBtn = document.querySelector(".nav-links .bx-x");
+menuOpenBtn.onclick = function() {
+navLinks.style.left = "0";
+}
+menuCloseBtn.onclick = function() {
+navLinks.style.left = "-100%";
+}
+
+
+// sidebar submenu open close js code
+let htmlcssArrow = document.querySelector(".htmlcss-arrow");
+htmlcssArrow.onclick = function() {
+ navLinks.classList.toggle("show1");
+}
+let moreArrow = document.querySelector(".more-arrow");
+moreArrow.onclick = function() {
+ navLinks.classList.toggle("show2");
+}
+let jsArrow = document.querySelector(".js-arrow");
+jsArrow.onclick = function() {
+ navLinks.classList.toggle("show3");
+}
+function myFunction() {
+		var x = document.getElementById("myInput");
+		if (x.type === "password") {
+			x.type = "text";
+		} else {
+			x.type = "password";
+		}
+	}
+</script>
+<style>
+
+/* Full-width input fields */
+input[type=email], input[type=password] {
+	width: 60%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+button {
+	background-color: #04AA6D;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 50%;
+}
+
+button:hover {
+	opacity: 0.8;
+}
+
+.container {
+	padding: 16px;
+	margin-left: 20px;
+	text-align: center;
+}
+
+span.psw {
+	float: right;
+	padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	/* Full width */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 8% auto 15% auto;
+	/* 5% from the top, 15% from the bottom and centered */
+	border: 1px solid #888;
+	width: 40%; /* Could be more or less, depending on screen size */
+}
+
+h3 {
+	text-align: end;
+	font-style: italic;
+	font-family: inherit;
+	font-size: x-large;
+	color: lightseagreen;
+}
+
+input[type=email], input[type=password], input[type=text] {
+	width: 60%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+</style>
+</html>

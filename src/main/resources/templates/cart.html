@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal - www.codingnepalweb.com -->
+<html lang="en" dir="ltr" xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<!-- <title> Responsive Drop Down Navigation Menu | CodingLab </title>-->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Boxicons CDN Link -->
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'
+	rel='stylesheet'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/header.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/footer.css">
+<title>Admin Panel</title>
+</head>
+<body>
+
+	<nav>
+		<div class="navbar">
+			<i class='bx bx-menu'></i>
+			<div class="logo">
+				<a href="#">Learning</a>
+			</div>
+			<div class="nav-links">
+				<div class="sidebar-logo">
+					<span class="logo-name">CodingLab</span> <i class='bx bx-x'></i>
+				</div>
+				<ul class="links">
+
+					<li><a href="/">HOME</a></li>
+					<li><a href="#">WEB DESIGN</a> <i
+						class='bx bxs-chevron-down htmlcss-arrow arrow  '></i>
+						<ul class="htmlCss-sub-menu sub-menu">
+							<li><a href="content/html">HTML</a></li>
+							<li><a href="content/css">CSS</a></li>
+							<li><a href="content/bootstrap">Bootstrap</a></li>
+							<li class="more"><span><a href="#">More</a> <i
+									class='bx bxs-chevron-right arrow more-arrow'></i> </span>
+								<ul class="more-sub-menu sub-menu">
+									<li><a href="#">Neumorphism</a></li>
+									<li><a href="#">Pre-loader</a></li>
+									<li><a href="#">Glassmorphism</a></li>
+								</ul></li>
+						</ul></li>
+					<li><a href="#">PROGRAMMING</a> <i
+						class='bx bxs-chevron-down js-arrow arrow '></i>
+						<ul class="js-sub-menu sub-menu">
+							<li><a href="content?id=java">JAVA</a></li>
+							<li><a href="content?id=python">PYTHON</a></li>
+							<li><a href="content?id=golang">GO LANG</a></li>
+							<li><a href="content?id=swift">SWIFT</a></li>
+						</ul></li>
+					<li><a href="#">ABOUT US</a></li>
+					<li><a th:href="@{'cartpage?user='+ ${session.email}}"><i
+							class="fa fa-cart-arrow-down" style="font-size: 30px"></i>&nbsp;cart</a></li>
+
+					<li th:if="${session.login} == null"><a href="#"
+						th:href="login">LOGIN</a>|<a href="#" th:href="signup">SIGNUP</a></li>
+
+					<li th:if="${session.login} != null"><span
+						th:text=${session.login}></span> <i
+						class='bx bxs-chevron-down js-arrow arrow '></i>
+						<ul class="js-sub-menu sub-menu">
+							<li><a href="logout">logout</a></li>
+							<li><a href="profile">Profile</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			<div class="search-box">
+				<i class='bx bx-search'></i>
+				<div class="input-box">
+					<input type="text" placeholder="Search...">
+				</div>
+			</div>
+		</div>
+	</nav>
+	<br>
+	<br>
+	<h2 style="text-align: center;">All Cart Data Lists</h2>
+	<div class="gallery" th:each="prod : ${cartdata}">
+		<form action="buy">
+			<p>
+				<img th:src="@{${prod.imgloc}}"> <br> Created By: <span
+					th:text="${prod.contentBy}"></span><br> Price : $<span
+					th:text="${prod.price}"></span>
+			</p>
+			<input type="hidden" name="title" th:value='${prod.title}'> <input
+				type="hidden" name="price" th:value='${prod.price}'> <input
+				type="hidden" name="contentid" th:value='${prod.contentid}'>
+			<input type="hidden" name="loginid" th:value="${session.email}" />
+			<button class="button1">Buy Now</button>
+			<a class="button1" th:href="@{'remove?id='+${prod.cartid}}"
+				id="remove">Remove</a>
+		</form>
+	</div>
+	<a th:href="@{'sumbitdetails?user='+ ${session.email}}" class="button1"
+		style="margin-left: 45%; width: 200px; height: 70px;">Buy All Now</a>
+
+
+
+	<footer>
+		<div class="footer-right">
+			<div class="content">
+				<div class="top">
+					<div class="logo-details">
+						<span class="logo_name">Learning</span>
+					</div>
+					<div class="media-icons">
+						<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+							class="fa fa-twitter"></i></a> <a href="#"><i
+							class="fa fa-instagram"></i></a> <a href="#"><i
+							class="fa fa-linkedin"></i></a> <a href="#"><i
+							class="fa fa-youtube"></i></a>
+					</div>
+				</div>
+				<div class="link-boxes">
+					<ul class="box">
+						<li class="link_name">Links</li>
+						<li><a href="/">Home</a></li>
+						<li><a href="#">Contact</a></li>
+						<li><a href="#">About Us</a></li>
+						<li><a href="#">Get Started</a></li>
+
+					</ul>
+					<ul class="box">
+						<li class="link_name">Services</li>
+						<li><a href="#">App Design</a></li>
+						<li><a href="#">Web Design</a></li>
+						<li><a href="#">Logo Design</a></li>
+						<li><a href="#">Banner Design</a></li>
+
+					</ul>
+					<ul class="box">
+						<li class="link_name">Other services</li>
+						<li><a href="#">SEO</a></li>
+						<li><a href="#">Content Marketing</a></li>
+						<li><a href="#">Prints</a></li>
+						<li><a href="#">Social Media</a></li>
+
+					</ul>
+					<ul class="box">
+						<li class="link_name">Contact</li>
+						<li><a href="#">+91 8879887262</a></li>
+						<li><a href="#">+91 8879887262</a></li>
+						<li><a href="#">contact@Learning.com</a></li>
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="bottom-details">
+				<div class="bottom_text">
+					<span class="copyright_text">Copyright © 2021 <a href="#">Sitesoch.</a></span>
+					<span class="policy_terms"> <a href="#">Privacy policy</a>
+
+					</span>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+<style>
+button, #remove {
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px;
+	margin-left: 56%;
+	cursor: pointer;
+}
+
+.button1, #remove {
+	padding: 10px 24px;
+}
+
+.button1:hover, #remove:hover {
+	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+div.gallery {
+	margin-left: 100px;
+	border: 2px solid #030303;
+	float: left;
+	width: 80%;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+div.gallery:hover {
+	border: 2px solid #030303;
+	transform: scale(1.1);
+}
+
+div.gallery img {
+	width: 30%;
+	height: 150px;
+	float: left;
+	broder: 1px;
+}
+
+div.desc {
+	padding: 15px;
+	text-align: center;
+}
+
+.centered {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: green;
+	transform: translate(-50%, -50%);
+}
+</style>
+<script>
+	  // search-box open close js code
+let navbar = document.querySelector(".navbar");
+let searchBox = document.querySelector(".search-box .bx-search");
+// let searchBoxCancel = document.querySelector(".search-box .bx-x");
+
+searchBox.addEventListener("click", ()=>{
+  navbar.classList.toggle("showInput");
+  if(navbar.classList.contains("showInput")){
+    searchBox.classList.replace("bx-search" ,"bx-x");
+  }else {
+    searchBox.classList.replace("bx-x" ,"bx-search");
+  }
+});
+
+// sidebar open close js code
+let navLinks = document.querySelector(".nav-links");
+let menuOpenBtn = document.querySelector(".navbar .bx-menu");
+let menuCloseBtn = document.querySelector(".nav-links .bx-x");
+menuOpenBtn.onclick = function() {
+navLinks.style.left = "0";
+}
+menuCloseBtn.onclick = function() {
+navLinks.style.left = "-100%";
+}
+
+
+// sidebar submenu open close js code
+let htmlcssArrow = document.querySelector(".htmlcss-arrow");
+htmlcssArrow.onclick = function() {
+ navLinks.classList.toggle("show1");
+}
+let moreArrow = document.querySelector(".more-arrow");
+moreArrow.onclick = function() {
+ navLinks.classList.toggle("show2");
+}
+let jsArrow = document.querySelector(".js-arrow");
+jsArrow.onclick = function() {
+ navLinks.classList.toggle("show3");
+}
+
+</script>
+</html>
